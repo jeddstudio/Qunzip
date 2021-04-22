@@ -7,10 +7,11 @@ import img2pdf
 zipfolder = os.getcwd()
 
 # read all zip files in folder
-for zip_files in os.listdir(zipfolder):
-    if not zip_files.endswith(".zip"): # 這兩行可以用來避免'.DS_Store' problem in Mac
-        continue
-    # zip_name = zipfolder+zip_files #應該冇用⋯
+for zip_files in os.listdir(zipfolder):# 這三行可以用來避免'.DS_Store' problem in Mac
+    if not zip_files.endswith(".zip"):
+        if not zip_files.endswith(".rar"):
+            continue
+
     clean_name = os.path.splitext(zip_files)[0]
     dirname = zipfolder+'/'+clean_name
 
@@ -27,7 +28,8 @@ for zip_files in os.listdir(zipfolder):
         imgs = []
         for pdf_files in os.listdir(dirname):
             if not pdf_files.endswith(".jpg"):
-                continue
+                if not pdf_files.endswith(".png"):
+                    continue
             path = os.path.join(dirname, pdf_files)
             if os.path.isdir(path):
                 continue
@@ -37,12 +39,12 @@ for zip_files in os.listdir(zipfolder):
 
 # 把PDF放在圖片新開的folder內，二選一
     # pdf_path = zipfolder+'/'+'/'+clean_name+'/'+clean_name+'.pdf'
-    # print(pdf_path)
     # with open(pdf_path, "wb") as f:
     #     imgs = []
     #     for pdf_files in os.listdir(dirname):
     #         if not pdf_files.endswith(".jpg"):
-    #             continue
+    #             if not pdf_files.endswith(".png"):
+    #                 continue
     #         path = os.path.join(dirname, pdf_files)
     #         if os.path.isdir(path):
     #             continue
